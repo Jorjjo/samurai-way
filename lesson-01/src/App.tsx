@@ -1,6 +1,6 @@
 import './App.css';
 
-function App() {
+export function App() {
     const tracks = [
         {
             id: 1,
@@ -39,5 +39,3 @@ function App() {
         </>
     );
 }
-
-export default App;
