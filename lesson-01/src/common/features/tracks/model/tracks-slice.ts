@@ -1,13 +1,25 @@
-import type { Track } from '../../../types/types';
-import { createAppSlice } from '../../../utils/createAppSlice';
+import { createAppSlice } from '@/common/utils/createAppSlice';
+import type { GetTrackResponse, Track } from '../TracksTypes';
 import { tracksApi } from '../api/tracksApi';
+
+type TracksState = {
+    tracks: Track[];
+    selectedTrackId: string | null;
+    trackDetails: GetTrackResponse['data'] | null;
+};
+
+const initialState: TracksState = {
+    tracks: [],
+    selectedTrackId: null,
+    trackDetails: null,
+};
 
 export const tracksSlice = createAppSlice({
     name: 'tracks',
-    initialState: [] as Track[],
+    initialState: initialState,
     reducers: (create) => ({
         fetchTracksTC: create.asyncThunk(
-            async (_args, { rejectWithValue, dispatch }) => {
+            async (_args, { rejectWithValue }) => {
                 try {
                     const res = await tracksApi.fetchTracks();
                     console.log('Response:', res.data);
@@ -18,17 +30,35 @@ export const tracksSlice = createAppSlice({
                 }
             },
             {
-                fulfilled: (_state, action) => {
-                    return action.payload.tracks;
+                fulfilled: (state, action) => {
+                    state.tracks = action.payload.tracks;
+                },
+            },
+        ),
+        getTrackDetailsTC: create.asyncThunk(
+            async (args: { trackId: string }, { rejectWithValue }) => {
+                try {
+                    const res = await tracksApi.getTrackDetails(args);
+                    console.log('Response:', res.data);
+                    const trackDetails = res.data;
+                    return { trackDetails };
+                } catch (error) {
+                    return rejectWithValue(null);
+                }
+            },
+            {
+                fulfilled: (state, action) => {
+                    state.trackDetails = action.payload.trackDetails;
                 },
             },
         ),
     }),
     selectors: {
-        selectTracks: (state) => state,
+        selectTracks: (state) => state.tracks,
+        selectTrackDetails: (state) => state.trackDetails,
     },
 });
 
 export const { fetchTracksTC } = tracksSlice.actions;
 export const tracksReducer = tracksSlice.reducer;
-export const { selectTracks } = tracksSlice.selectors;
+export const { selectTracks, selectTrackDetails } = tracksSlice.selectors;

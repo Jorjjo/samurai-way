@@ -2,7 +2,7 @@ import { AppBar, Container, Toolbar } from '@mui/material';
 
 export function Header() {
     return (
-        <AppBar position='static' sx={{ mb: '30px' }} color='inherit'>
+        <AppBar position='sticky' sx={{ mb: '30px' }} color='inherit'>
             <Toolbar>
                 <Container>
                     <h2>MusicFun</h2>

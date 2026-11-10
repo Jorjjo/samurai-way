@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { tracksReducer } from '../common/features/tracks/model/tracks-slice';
+import { appReducer } from './app-slice';
+import { tracksReducer } from '@/common/features/tracks/model/tracks-slice';
 
 export const store = configureStore({
     reducer: {
         tracks: tracksReducer,
+        app: appReducer,
     },
 });
 
