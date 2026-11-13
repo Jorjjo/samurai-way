@@ -7,7 +7,7 @@ export const tracksApi = {
     },
     getTrackDetails(payload: { trackId: string }) {
         const { trackId } = payload;
-        return instance.get<GetTrackResponse['data']>(
+        return instance.get<GetTrackResponse>(
             `/playlists/tracks/${trackId}`,
         );
     },

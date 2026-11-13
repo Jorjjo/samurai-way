@@ -11,6 +11,8 @@ export type Track = {
     relationships: TrackRelationships;
 };
 
+export type TrackDetails = GetTrackResponse['data'];
+
 export type TrackAttributes = {
     title: string;
     addedAt: string;

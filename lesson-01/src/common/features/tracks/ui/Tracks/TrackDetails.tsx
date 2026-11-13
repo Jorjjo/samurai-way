@@ -1,16 +1,19 @@
-
-
-
-import { useAppSelector } from '@/common/hooks';
-import { selectTrackDetails } from '../../model/tracks-slice';
-
-
+import { useAppDispatch, useAppSelector } from '@/common/hooks';
+import {
+    selectTrackDetails,
+    setSelectedTrackIdAC,
+} from '../../model/tracks-slice';
 
 export function TrackDetails() {
     const trackDetails = useAppSelector(selectTrackDetails);
+    const dispatch = useAppDispatch();
+
+    const handleReset = () => {
+        dispatch(setSelectedTrackIdAC({ trackId: null }));
+    };
     return (
         <div>
-            <h4>Details</h4>
+            <h2>Details</h2>
 
             {trackDetails ? (
                 <div>
@@ -21,7 +24,7 @@ export function TrackDetails() {
                 <p>Track is not selected</p>
             )}
 
-            <button>Reset selection</button>
+            <button onClick={handleReset}>Reset selection</button>
         </div>
     );
 }
