@@ -5,6 +5,7 @@ import { useAppDispatch } from '@/common/hooks';
 import { TracksList } from '@/common/features/tracks/ui/TracksList';
 import { fetchTracksTC } from '@/common/features/tracks/model/tracks-slice';
 import { TrackDetails } from '@/common/features/tracks/ui/Tracks/TrackDetails';
+import { PageTitle } from '@/common/components/PageTitle';
 
 export function Main() {
     const dispatch = useAppDispatch();
@@ -13,6 +14,7 @@ export function Main() {
     }, []);
     return (
         <Container>
+            <PageTitle/>
             <div className={'tracksContainer'}>
                 <TracksList />
                 <TrackDetails />

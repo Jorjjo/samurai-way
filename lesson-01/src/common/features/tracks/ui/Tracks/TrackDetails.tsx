@@ -14,6 +14,7 @@ export function TrackDetails() {
     return (
         <div>
             <h2>Details</h2>
+            <button onClick={handleReset}>Reset selection</button>
 
             {trackDetails ? (
                 <div>
@@ -23,8 +24,6 @@ export function TrackDetails() {
             ) : (
                 <p>Track is not selected</p>
             )}
-
-            <button onClick={handleReset}>Reset selection</button>
         </div>
     );
 }
