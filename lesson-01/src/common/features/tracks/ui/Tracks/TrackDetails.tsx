@@ -6,11 +6,12 @@ import {
 
 export function TrackDetails() {
     const trackDetails = useAppSelector(selectTrackDetails);
+    // я бы переносы добавил для группировки по смыслу
     const dispatch = useAppDispatch();
-
     const handleReset = () => {
         dispatch(setSelectedTrackIdAC({ trackId: null }));
     };
+    // я бы переносы добавил для группировки по смыслу
     return (
         <div>
             <h2>Details</h2>

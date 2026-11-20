@@ -1,8 +1,8 @@
+import { setStatusAC } from '@/app/app-slice';
+import type { RequestStatus } from '@/common/types';
 import { createAppSlice } from '@/common/utils/createAppSlice';
 import type { Track, TrackDetails } from '../TracksTypes';
 import { tracksApi } from '../api/tracksApi';
-import { setStatusAC } from '@/app/app-slice';
-import type { RequestStatus } from '@/common/types';
 
 export type TracksState = {
     tracks: Track[];
@@ -22,6 +22,7 @@ export const tracksSlice = createAppSlice({
     name: 'tracks',
     initialState,
     reducers: (create) => ({
+        // fetchTracksList
         fetchTracksTC: create.asyncThunk(
             async (_args, { rejectWithValue, dispatch }) => {
                 try {
@@ -41,6 +42,7 @@ export const tracksSlice = createAppSlice({
                 },
             },
         ),
+        // fetchTrackDetails
         getTrackDetailsTC: create.asyncThunk(
             async (
                 args: { trackId: string },
